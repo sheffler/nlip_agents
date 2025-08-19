@@ -1,0 +1,20 @@
+[project]
+name = "nlip-agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "litellm>=1.75.5.post1",
+    "nlip-client",
+    "nlip-sdk",
+    "nlip-server",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv.sources]
+nlip-sdk = { path = "../nlip_sdk", editable = true }
+nlip-server = { path = "../nlip_server", editable = true }
+nlip-client = { path = "../nlip_client", editable = true }
