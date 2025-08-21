@@ -11,14 +11,15 @@ from nlip_agents import logger
 class ChatApplication(server.NLIP_Application):
     async def startup(self):
         logger.info("Starting app...")
+        self.myAgent = WeatherAgent(
+            "Weather"
+        )
 
     async def shutdown(self):
         return None
 
     async def create_session(self) -> server.NLIP_Session:
-        return ChatSession(WeatherAgent(
-            "Weather"
-        ))
+        return ChatSession(self.myAgent)
 
 
 class ChatSession(server.NLIP_Session):

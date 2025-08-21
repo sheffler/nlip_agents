@@ -25,8 +25,8 @@ logger = logging.getLogger("NLIP")
 
 # MODEL = 'llama3.2:latest'
 # MODEL = 'ollama_chat/llama3.2:latest'
-MODEL = 'ollama_chat/llama3-groq-tool-use:latest'
-# MODEL = "anthropic/claude-3-7-sonnet-20250219"
+# MODEL = 'ollama_chat/llama3-groq-tool-use:
+MODEL = "anthropic/claude-3-7-sonnet-20250219"
 
 
 #
@@ -71,6 +71,17 @@ async def send_to_server(url: AnyHttpUrl, msg: str) -> dict:
     return str(nlip_resp.model_dump())
 
 
+NLIP = """
+You are an advanced NLIP Agent with the capability to speak to other NLIP Agents.
+You have two tools for this purpose:
+- connect_to_server
+- send_to_server
+
+When you are asked to connect to a server at a specific URL, use the connect_to_server tool with that URL to establish a connection.
+If the response to that tool begins with: "Connected to ", then the connection is valid.  Otherwise, it is not.
+For a valid connection, you should follow the connect_to_server tool call with a tool call of send_to_server to the same URL with the string: "What are your NLIP Capabilities?"
+The remote Agent will respond with its [NAME] and capabities.  Take note of this information, especially the NAME.  In future requests, if a user asks for you to send a request to NAME you should use the send_to_server tool with the URL that was associated with NAME and use the request as the msg: argument.
+"""
 
 class NlipAgent(BasicAgent):
 
@@ -84,6 +95,7 @@ class NlipAgent(BasicAgent):
         super().__init__(name, model=model, tools=tools)
 
         self.add_instruction("You are an agent with tools for querying other NLIP Agent Servers")
+        self.add_instruction(NLIP)
 
         if instruction:
             self.add_instruction(instruction)

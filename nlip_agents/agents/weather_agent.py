@@ -14,7 +14,8 @@ import httpx
 NWS_API_BASE = "https://api.weather.gov"
 USER_AGENT = "weather-app/1.0"
 
-MODEL = 'ollama_chat/llama3.2:latest'
+#MODEL = 'ollama_chat/llama3.2:latest'
+MODEL = "anthropic/claude-3-7-sonnet-20250219"
 
 logger = logging.getLogger("nlip")
 
