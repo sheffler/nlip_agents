@@ -37,9 +37,13 @@ class ChatSession(server.NLIP_Session):
         text = msg.extract_text()
 
         try:
-            response = await self.agent.process_query(text)
-            logger.info(f"Response : {response}")
-            return NLIP_Factory.create_text(response)
+            results = await self.agent.process_query(text)
+            logger.info(f"Results : {results}")
+            msg = NLIP_Factory.create_text(results[0])
+            for res in results[1:]:
+               msg.add_text(res)
+            return msg
+            
         except Exception as e:
             logger.error(f"Exception {e}")
             return None

@@ -80,7 +80,7 @@ You have two tools for this purpose:
 When you are asked to connect to a server at a specific URL, use the connect_to_server tool with that URL to establish a connection.
 If the response to that tool begins with: "Connected to ", then the connection is valid.  Otherwise, it is not.
 For a valid connection, you should follow the connect_to_server tool call with a tool call of send_to_server to the same URL with the string: "What are your NLIP Capabilities?"
-The remote Agent will respond with its [NAME] and capabities.  Take note of this information, especially the NAME.  In future requests, if a user asks for you to send a request to NAME you should use the send_to_server tool with the URL that was associated with NAME and use the request as the msg: argument.
+The remote Agent will respond with its [NAME] and capabilities.  Take note of this information, especially the NAME.  In future requests, if a user asks for you to send a request to NAME you should use the send_to_server tool with the URL that was associated with NAME and use the request as the msg: argument.
 """
 
 class NlipAgent(BasicAgent):

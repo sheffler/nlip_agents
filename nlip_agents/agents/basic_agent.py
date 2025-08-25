@@ -30,19 +30,9 @@ load_dotenv()
 # MODEL = 'ollama_chat/llama3-groq-tool-use:latest'
 MODEL = "anthropic/claude-3-7-sonnet-20250219"
 
-################################################################
-# from nlip_sdk import nlip
-# # from function_schema import function_schema
-# from pydantic import schema_json_of, schema_of
-
-# def process_nlip(target: str, msg: nlip.NLIP_Message) -> nlip.NLIP_Message:
-#     print(f"NLIPMSG: {msg}")
-#     return nlip.NLIP_Factory.create_text("This is the result")
-
-# print(schema_json_of(process_nlip, title="Foo", indent=2))
-
-
-################################################################
+#
+# PROMPTS
+#
 
 INSTRUCTION = """
 You are an agent with tools.  When calling a tool, make sure to match the type signature of the tool.
@@ -52,17 +42,18 @@ NLIP = """
 You are an NLIP Agent.
 
 NLIP is an acronym for "Natural Language Interaction Protocol."  The NLIP project aims to define a protocol for the following use cases.
-- Agent to Agent interactions in Natual Language
+- Agent to Agent interactions in Natural Language
 - User-Agent to Agent protocol
 
 An NLIP Agent, when defined, is given a system instruction that describes its unique capabilities.
 
 One of the first requests an NLIP Agent will be asked to fulfill is to describe its NLIP Capabilities.
 When you are asked to describe your NLIP Capabilities, you should respond with a response of the format:
-    [NAME] CAPABILITY1:description, CAPABILITY2:description, CAPABILITY3:description, ...
+    AGENT:NAME
+    CAPABILITY1:description, CAPABILITY2:description, CAPABILITY3:description, ...
 - where NAME is your name
 - CAPABILITITY1, CAPABILITY2 and CAPABILITY3 are dictionary keys.  The description associated with each should be unique.
-- the square brackets surrounding your NAME are important
+- it is important that you include your NAME
 - it is important that the capabilities are described in a means that another LLM can understand them
 
 """
@@ -103,7 +94,7 @@ class BasicAgent:
         ]
 
         # Every agent knows its name
-        self.add_instruction(f"Your name is {name}.")
+        self.add_instruction(f"Your NAME is {name}.")
 
         # Add other instructions
         if instruction:
@@ -227,7 +218,7 @@ class BasicAgent:
     # Process a user query.  Return a message.
     #
             
-    async def process_query(self, query: str) -> str:
+    async def process_query(self, query: str) -> list[str]:
         print(f"Processing query")
 
         # reset the result text
@@ -273,7 +264,7 @@ class BasicAgent:
             # Are there more tool calls?
             tool_calls = response_message.tool_calls
 
-        return "\n".join(self.final_text)
+        return self.final_text
 
     #
     # Provide a simple console based command loop for testing
@@ -290,7 +281,8 @@ class BasicAgent:
                 if query.lower() == "quit":
                     break
 
-                response = await self.process_query(query)
+                responses = await self.process_query(query)
+                response = "\n".join(responses)
                 print("\n" + response)
 
             except Exception as e:
