@@ -1,4 +1,3 @@
-
 # NLIP Agents
 
 This project provides a simple framework for building Agents that speak NLIP protocol.
@@ -10,9 +9,9 @@ Features:
 - Prompts - instruction inclusion.
 - Conversation History
 
-The screenshot below illustrates a session between two NLIP agents.  There is a main agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have instructed the front agent to connect to the back end agent and then for it to ask the Weather agent for a forecast.
+The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is a coordinator agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the coordinator agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather agent for a forecast for Chicago.
 
-![Agent-to-Agent](pics/agent-to-agent-01.png)
+![Agent-to-Agent](pics/mach2-2.png)
 
 
 ## How to use this package
@@ -31,6 +30,7 @@ This project works well with `uv`.
 
 1. Create a virtual environment.
 
+        $ cd git/nlip_agents
         $ uv venv
     	$ . .venv/bin/activate
 		
@@ -57,6 +57,14 @@ The individual agents have built-in console runners for interacting with them di
 
     $ cd git/nlip_agents
     $ python -m nlip_agents.agents.weather_agent
+    
+## Put secrets in the .env file
+
+This project uses LiteLLM to connect to various LLMs.  If using a paid or remote LLM that requires a key, you can place it in the `.env` file in the root of the project.
+
+For example, if you are using Anthropic, you would place your API KEY in it.
+
+    ANTHROPIC_API_KEY=sk-ant-api03-b2R1absad...
 
 
 ## Defining a new agent
@@ -86,3 +94,4 @@ myAgent = BasicAgent("MyName",
 
 - Natural language negotiation of agent capabilities upon connect.  Discovery of remote agent Name.
 - Correleated session handling - spawn a new agent for a new session.
+- Flexible logging
