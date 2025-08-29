@@ -12,7 +12,7 @@ import httpx
 import json
 
 # Import NLIP
-from nlip_client.nlip_client import NLIP_HTTPX_Client
+from nlip_agents.http_client.nlip_async_client import NlipAsyncClient
 from nlip_sdk.nlip import NLIP_Factory, NLIP_Message
 from urllib.parse import urlparse
 
@@ -45,7 +45,7 @@ async def connect_to_server(url):
 
     # Establish the URL and return a connection message
     await asyncio.sleep(1.0)
-    client = NLIP_HTTPX_Client.create_from_url(f"http://{host}:{port}/nlip/")   
+    client = NlipAsyncClient.create_from_url(f"http://{host}:{port}/nlip/")   
     sessions[host] = client
 
     logger.info(f"Saved {host} with client {client}")
