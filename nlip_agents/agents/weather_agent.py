@@ -17,7 +17,8 @@ USER_AGENT = "weather-app/1.0"
 #MODEL = 'ollama_chat/llama3.2:latest'
 MODEL = "anthropic/claude-3-7-sonnet-20250219"
 
-logger = logging.getLogger("nlip")
+# Use the NLIP logger in this package
+logger = logging.getLogger("NLIP")
 
 async def make_nws_request(url: str) -> dict[str, Any] | None:
     """Make a request to the NWS API with proper error handling."""
