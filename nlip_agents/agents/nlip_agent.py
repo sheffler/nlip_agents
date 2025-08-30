@@ -1,5 +1,5 @@
 #
-# A Weather Agent has tools for querying about weather conditions and alerts.
+# An NLIP Coordinator Agent has tools for communicating with other NLIP Agents.
 # An additional system instruction helps refine its behavior.
 
 import logging
@@ -21,6 +21,7 @@ from pydantic import AnyHttpUrl
 # map host->session
 sessions = { }
 
+# Use the NLIP logger in this package
 logger = logging.getLogger("NLIP")
 
 # MODEL = 'llama3.2:latest'
