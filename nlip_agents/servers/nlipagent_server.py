@@ -3,6 +3,7 @@
 #
 
 import os
+import logging
 
 from nlip_sdk.nlip import NLIP_Message
 from nlip_sdk.nlip import NLIP_Factory
@@ -12,7 +13,7 @@ from nlip_agents.agents.nlip_agent import NlipAgent
 import nlip_agents.http_server.nlip_session_server as server
 from nlip_agents.http_server.nlip_session_server import SessionManager
 
-from nlip_agents import logger
+from nlip_agents import logger, log_to_console
 import uvicorn
 
 
@@ -54,6 +55,12 @@ server.SESSION_MANAGER_CLASS = NlipManager
 server.SESSION_COOKIE_NAME = "NlipCoordinatorCookie"
 
 app = server.app
+
+#
+# Configure the NLIP logger
+#
+
+log_to_console(logging.INFO)
 
 if __name__ == "__main__":
     # uvicorn.run(app, host="0.0.0.0", port=8024, log_level="info")
