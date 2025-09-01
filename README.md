@@ -16,14 +16,12 @@ The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is
 
 ## How to use this package
 
-We recommend checking out the NLIP dependencies in directories adjacent to this project's directory.
+We recommend checking out the NLIP SDK dependency in a directory adjacent to this project's directory.
 
     $ mkdir git
 	$ cd git
 	$ git clone https://github.com/nlip-project/nlip_sdk
-	$ git clone https://github.com/nlip-project/nlip_server
-	$ git clone https://github.com/nlip-project/nlip_client
-	$ git clone https://github.com/nlip-project/nlip_agents
+	$ git clone https://github.com/sheffler/nlip_agents
 	
 
 This project works well with `uv`.
