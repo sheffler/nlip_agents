@@ -7,7 +7,7 @@ import os
 from nlip_sdk.nlip import NLIP_Message
 from nlip_sdk.nlip import NLIP_Factory
 
-from nlip_agents.agents.weather_agent import WeatherAgent
+from nlip_agents.agents.weather_nlip_agent import WeatherNlipAgent
 
 import nlip_agents.http_server.nlip_session_server as server
 from nlip_agents.http_server.nlip_session_server import SessionManager
@@ -25,7 +25,7 @@ class WeatherManager(SessionManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.myAgent = WeatherAgent(
+        self.myAgent = WeatherNlipAgent(
             "Weather"
         )
 
