@@ -6,9 +6,9 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "litellm>=1.75.5.post1",
-    "nlip-client",
+    "fastapi>=0.116",
+    "uvicorn>=0.35",
     "nlip-sdk",
-    "nlip-server",
 ]
 
 [dependency-groups]
@@ -16,5 +16,3 @@ dev = []
 
 [tool.uv.sources]
 nlip-sdk = { path = "../nlip_sdk", editable = true }
-nlip-server = { path = "../nlip_server", editable = true }
-nlip-client = { path = "../nlip_client", editable = true }

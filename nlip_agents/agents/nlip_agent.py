@@ -1,5 +1,5 @@
 #
-# A Weather Agent has tools for querying about weather conditions and alerts.
+# An NLIP Coordinator Agent has tools for communicating with other NLIP Agents.
 # An additional system instruction helps refine its behavior.
 
 import logging
@@ -12,7 +12,7 @@ import httpx
 import json
 
 # Import NLIP
-from nlip_client.nlip_client import NLIP_HTTPX_Client
+from nlip_agents.http_client.nlip_async_client import NlipAsyncClient
 from nlip_sdk.nlip import NLIP_Factory, NLIP_Message
 from urllib.parse import urlparse
 
@@ -21,6 +21,7 @@ from pydantic import AnyHttpUrl
 # map host->session
 sessions = { }
 
+# Use the NLIP logger in this package
 logger = logging.getLogger("NLIP")
 
 # MODEL = 'llama3.2:latest'
@@ -33,23 +34,26 @@ MODEL = "anthropic/claude-3-7-sonnet-20250219"
 # Make a connection and return a status string
 #
     
-async def connect_to_server(url):
+async def connect_to_server(url: AnyHttpUrl):
     """Connect to the server and return a message"""
     try:
         parsed_url = urlparse(url)
-        host = parsed_url.hostname
-        port = parsed_url.port
+        scheme = parsed_url.scheme
+        netloc = parsed_url.netloc
     except Exception as e:
         instance.text = f"Exception: {e}"
         return
 
     # Establish the URL and return a connection message
     await asyncio.sleep(1.0)
-    client = NLIP_HTTPX_Client.create_from_url(f"http://{host}:{port}/nlip/")   
-    sessions[host] = client
+    client = NlipAsyncClient.create_from_url(f"{scheme}://{netloc}/nlip/")
 
-    logger.info(f"Saved {host} with client {client}")
-    return f"Connected to http://{host}:{port}/"
+    # Remember this client for this server
+    hashkey = f"{scheme}://{netloc}"
+    sessions[hashkey] = client
+
+    logger.info(f"Saved {netloc} with client {client}")
+    return f"Connected to {scheme}://{netloc}/"
 
 #
 # Send a message to a named host and get a response
@@ -58,9 +62,12 @@ async def connect_to_server(url):
 # async def send_to_server(url: AnyHttpUrl, msg: str) -> NLIP_Message:
 async def send_to_server(url: AnyHttpUrl, msg: str) -> dict:
     parsed_url = urlparse(url)
-    host = parsed_url.hostname
-    port = parsed_url.port
-    client = sessions[host]
+    scheme = parsed_url.scheme
+    netloc = parsed_url.netloc
+
+    # Look up the client for this server
+    hashkey = f"{scheme}://{netloc}" # netloc includes host and port, if specified
+    client = sessions[hashkey]
 
     nlip_message = NLIP_Factory.create_text(msg)
     logger.info(f"Sending message: {msg}")
