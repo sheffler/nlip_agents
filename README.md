@@ -9,7 +9,7 @@ Features:
 - Prompts - instruction inclusion.
 - Conversation History
 
-The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is a coordinator agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the coordinator agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather agent for a forecast for Chicago.
+The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is a Coordinator Agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the Coordinator Agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather Agent for a forecast for Chicago.
 
 ![Agent-to-Agent](pics/mach2-2.png)
 
@@ -49,7 +49,7 @@ Use the top-level scripts to run the various web servers.
     $ cd git/nlip_agents
     $ python run_basic.py &
     $ python run_weather.py &
-    $ python run_nlipagent.py &
+    $ python run_coordinator.py &
    
 The individual agents have built-in console runners for interacting with them directly in the terminal.  Use python with the `-m` flag to set up the package properly.
 

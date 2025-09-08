@@ -5,7 +5,7 @@
 import logging
 
 import asyncio
-from . basic_agent import BasicAgent
+from .nlip_agent import NlipAgent
 
 from typing import Any
 import httpx
@@ -101,7 +101,7 @@ Forecast: {period['detailedForecast']}
 
 
 
-class WeatherAgent(BasicAgent):
+class WeatherNlipAgent(NlipAgent):
 
     def __init__(self,
                  name: str,
@@ -125,7 +125,7 @@ async def main():
         print("Usage: python client.py <path_to_server_script>")
         sys.exit(1)
 
-    agent = WeatherAgent(
+    agent = WeatherNlipAgent(
         "Weather"
     )
     

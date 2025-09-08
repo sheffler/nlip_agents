@@ -1,5 +1,5 @@
 #
-# A Server that Launches a NlipAgent instance for each session
+# A Server that Launches a CoordinatorNlipAgent instance for each session
 #
 
 import os
@@ -8,7 +8,7 @@ import logging
 from nlip_sdk.nlip import NLIP_Message
 from nlip_sdk.nlip import NLIP_Factory
 
-from nlip_agents.agents.nlip_agent import NlipAgent
+from nlip_agents.agents.coordinator_nlip_agent import CoordinatorNlipAgent
 
 import nlip_agents.http_server.nlip_session_server as server
 from nlip_agents.http_server.nlip_session_server import SessionManager
@@ -26,7 +26,7 @@ class NlipManager(SessionManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.myAgent = NlipAgent(
+        self.myAgent = CoordinatorNlipAgent(
             "Margaret"
         )
 
