@@ -1,3 +1,14 @@
+#
+# A Basic Agent implements a converation with an LLM, augmented with tools and prompt instructions.
+#
+# The Basic Agent maintains the conversation history with the LLM, and provides the logic for
+# calling Tools and incorporating their results.
+#
+# A new user query is sent to the agent with the process_query() method.  The result of the query
+# is a list of messages.
+#
+
+
 import logging
 import asyncio
 from typing import Optional, List, Dict, Any
@@ -24,6 +35,10 @@ litellm._turn_on_debug()
 
 # Load .env for vars like ANTHROPIC_API_KEY, etc
 load_dotenv()
+
+#
+# Configure the default MODEL for this project
+#
 
 # MODEL = 'llama3.2:latest'
 # MODEL = 'ollama_chat/llama3.2:latest'
