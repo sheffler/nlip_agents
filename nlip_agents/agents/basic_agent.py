@@ -159,7 +159,7 @@ class BasicAgent:
             result = await fn(**args)
             logger.info(f"Got tool result:{result}")
 
-            self.final_text.append(f"[Calling tool:{name} with args:{args}]")
+            self.final_text.append(f"Calling tool:{name} with args:{args}")
 
             # NOTE: this solves a strange problem with ollama only
             # if type(result) == int:
