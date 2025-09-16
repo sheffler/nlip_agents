@@ -10,7 +10,7 @@ Features:
 - Conversation History
 - Agent-to-Agent
 
-The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is a Coordinator Agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the Coordinator Agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather Agent for a forecast for Chicago.
+The screenshot below illustrates an Agent-to-Agent session using NLIP with the [Mach2 Chat App](https://github.com/sheffler/kivy-client-mach2).  There is a Coordinator Agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the Coordinator Agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather Agent for a forecast for Chicago.
 
 ![Agent-to-Agent](pics/mach2-2.png)
 
