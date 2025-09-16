@@ -1,6 +1,6 @@
 # NLIP Agents
 
-This project provides a simple framework for building Agents that speak NLIP protocol.
+This project provides a light framework for building Agents that speak NLIP protocol and for building Agent-to-Agent networks on top of NLIP.
 
 Features:
 
@@ -8,6 +8,7 @@ Features:
 - Tools - integration via Python functions.
 - Prompts - instruction inclusion.
 - Conversation History
+- Agent-to-Agent
 
 The screenshot below illustrates an Agent-to-Agent session using NLIP.  There is a Coordinator Agent at `http://localhost:2024` and a second agent at `http://localhost:2022` that has a tool for obtaining weather forecasts.  We have asked the Coordinator Agent to connect to the remote agent.  After it is connected, we have asked the coordinator Agent to ask the Weather Agent for a forecast for Chicago.
 
