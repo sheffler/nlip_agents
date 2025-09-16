@@ -65,6 +65,25 @@ For example, if you are using Anthropic, you would place your API KEY in it.
     ANTHROPIC_API_KEY=sk-ant-api03-b2R1absad...
 
 
+## Running the Multi-Agent Agent-to-Agent Demonstration
+
+Enter `http://localhost:8024` in the URL location bar at the top to connect to the Coordinator Agent.
+
+Now enter this prompt to ask the Coordinator agent about it's capabilities.
+
+    Hello.  Please describe your NLIP Capabilities.
+    
+Now ask the Coordinator agent to talk to the Weather agent.
+
+    Please connect to http://localhost:8022.
+    
+You will notice the Coordinator contacting the other agent, asking for its NAME and CAPABILITIES.
+
+Now ask the Coordinator to talk to the Weather agent.
+
+    Can you ask the Weather Agent what the forecast for Chicago is?
+
+
 ## Defining a new agent
 
 An agent employs an LLM to respond to natural language inputs and generate responses.  The prompt instructs the agent with special knowledge for solving problems, and the tools are functions the LLM can call to obtain information.
