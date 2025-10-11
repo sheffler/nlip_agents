@@ -1,5 +1,10 @@
 # NLIP Agents
 
+**See this in action at the [AI-Alliance](https://thealliance.ai/) Office Hours webinar.**
+[<img width=500 src="pics/ai-alliance-office-hours.png">](https://www.youtube.com/watch?v=lvZQW3I4FyI)
+
+<hr>
+
 This project provides a light framework for building Agents that speak NLIP protocol and for building Agent-to-Agent networks on top of NLIP.
 
 Features:
